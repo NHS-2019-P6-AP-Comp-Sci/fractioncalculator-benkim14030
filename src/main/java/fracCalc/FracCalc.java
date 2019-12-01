@@ -21,9 +21,9 @@ public class FracCalc {
 	public static int temp_den;
 	public static int com_den;
 
-/*
- *  Input loop: If the user enter quit then the loop ends.
- */
+	/*
+	 * Input loop: If the user enter quit then the loop ends.
+	 */
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Equation: ");
@@ -39,8 +39,8 @@ public class FracCalc {
 
 	/*
 	 * Checks how valid the input is: If its not a equation then it will produce an
-	 * error. Also splits and stores the fractions Array is used in order to get more
-	 * than 2 fractions.
+	 * error. Also splits and stores the fractions Array is used in order to get
+	 * more than 2 fractions.
 	 */
 	public static String produceAnswer(String input) {
 		String[] a_input = input.split(" ");
@@ -56,8 +56,8 @@ public class FracCalc {
 	}
 
 	/*
-	 * Calculating the expression: checks the operand and if its more than 2 then
-	 * it prints an error
+	 * Calculating the expression: checks the operand and if its more than 2 then it
+	 * prints an error
 	 */
 
 	public static void calc_ex(String operand, String op1, String op2) {
@@ -81,14 +81,15 @@ public class FracCalc {
 	}
 
 	/*
-	 * Parsing the fraction
+	 * Parsing the fraction: finds the denominator, numerator and the operand After
+	 * being found, it converts to a integer and goes to set value
 	 */
 	public static void p_frac(String op, Boolean op1) {
 		String whole_num = "0";
 		String num_op = "0";
 		String den_op = "0";
-		String[] splitwhole_num = op.split("_");
-		if (splitwhole_num.length == 2) {
+		String[] split_whole = op.split("_");
+		if (split_whole.length == 2) {
 			whole_num = op.split("_")[0];
 			num_op = op.split("_")[1].split("/")[0];
 			den_op = op.split("_")[1].split("/")[1];
@@ -106,7 +107,9 @@ public class FracCalc {
 		set_values(op1, Integer.parseInt(whole_num), Integer.parseInt(num_op), Integer.parseInt(den_op));
 	}
 
-//
+	/*
+	 * Set value: checks for negatives
+	 */
 	public static void set_values(Boolean op1, int whole_num, int num_op, int den_op) {
 		if (op1) {
 			frac_whole1 = whole_num;
@@ -133,7 +136,6 @@ public class FracCalc {
 
 				if (Integer.toString(whole_num).contains("-")) {
 					whole_num = Integer.parseInt(Integer.toString(whole_num).split("-")[1]);
-					// Convert back to negative
 					frac_imp2 = ((whole_num * den_op) + num_op) * (-1);
 				} else {
 					frac_imp2 = (whole_num * den_op) + num_op;
@@ -144,7 +146,7 @@ public class FracCalc {
 		}
 	}
 
-//
+//Set Results: Finds and compresses the fraction
 	public static void SetResult(int num_op, int den_op) {
 		if (num_op % den_op == 0) {
 			result = Integer.toString(num_op / den_op);
@@ -162,7 +164,7 @@ public class FracCalc {
 		}
 	}
 
-//
+// Finds the Greatest common denominator
 	public static int findGcd(int num1, int num2) {
 		if (num2 == 0) {
 			return num1;
@@ -170,7 +172,7 @@ public class FracCalc {
 		return findGcd(num2, num1 % num2);
 	}
 
-//
+//Gets the final result
 	public static String converter(int num_op, int den_op) {
 		Integer whole_num = num_op / den_op;
 		Integer r = num_op % den_op;
@@ -182,7 +184,9 @@ public class FracCalc {
 		return whole_num != 0 ? (whole_num + "_" + r + "/" + den_op) : (r + "/" + den_op);
 	}
 
-	// Calculations
+	/*
+	 *  Calculations: Does addition, subtraction, multiplication and division
+	 */
 	public static String Add() {
 
 		if (frac_den1 == frac_den2) {
